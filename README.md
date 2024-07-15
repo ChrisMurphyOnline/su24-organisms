@@ -50,25 +50,24 @@ We will provide a Java program that simulates the environment in which the organ
 
 # Creating Your Own Player <- NEEDS TO BE REVIEWED!
 Create a class called organisms.gX.GroupXPlayer where X is your group number. This class must implement organisms.Player, which defines the following methods:
-* register: this is called when the instance of the organism is first created; it has a reference to the OrganismsGame and also gets its ID/state value from its parent
-* name: returns a String indicating this species' name
-* color: returns a Color for use in display in the simulator
-* interactive: not used; return false
-* externalState: returns an int that is observable to organisms in adjacent squares
-* move: returns a Move object that indicates the direction in which this organism would like to move, or if it would like to reproduce
+* _register_: this is called when the instance of the organism is first created; it has a reference to the OrganismsGame and also gets its ID/state value from its parent
+* _name_: returns a String indicating this species' name
+* _color_: returns a Color for use in display in the simulator
+* _interactive_: not used; return false
+* _externalState_: returns an int that is observable to organisms in adjacent squares
+* _move_: returns a Move object that indicates the direction in which this organism would like to move, or if it would like to reproduce
 
-Clearly the _move_ method is most important. The first parameter (_foodpresent_) is a four-element array that indicates whether or not food is present in adjacent squares, e.g. _foodpresent[WEST]_ indicates whether there is food in the space to the left of this organism.
-
-Likewise, the second parameter (_neighbors_) indicates the external state of any organism in an adjacent square, e.g. _neighbors[NORTH]_ returns the value of calling _externalState()_ on the organism above this one. The value will be -1 if there is no organism present in that space.
-
-The third argument (_foodleft_) indicates the amount of food in the space currently occupied by the organism. The last argument (_energyleft_) indicates this organism's current energy level.
+Clearly the _move_ method is most important. This is called by the simulator on each time step of the simulation:
+* The first parameter (_foodpresent_) is a four-element array that indicates whether or not food is present in adjacent squares, e.g. _foodpresent[WEST]_ indicates whether there is food in the space to the left of this organism.
+* Likewise, the second parameter (_neighbors_) indicates the external state of any organism in an adjacent square, e.g. _neighbors[NORTH]_ returns the value of calling _externalState()_ on the organism above this one. The value will be -1 if there is no organism present in that space.
+* The third argument (_foodleft_) indicates the amount of food in the space currently occupied by the organism. The last argument (_energyleft_) indicates this organism's current energy level.
 
 If your player is not going to reproduce, return a new Move object in which the argument to the constructor is either the constant _STAYPUT_, _WEST_, _EAST_, _NORTH_, or _SOUTH_.
 
 If your player is going to reproduce, return a new Move object in which:
 * the first argument to the constructor is the constant _REPRODUCE_
 * the second argument is the direction to which the offspring should be born (_WEST_, _EAST_, _NORTH_, or _SOUTH_); keep in mind that you cannot reproduce onto an already-occupied space
-* the third argument is the initial value for the offspring's state variable (passed to the _register_ method)
+* the third argument is the initial value for the offspring's state variable (passed to the new instance's _register_ method)
 
 If your player would like to know the configuration parameters, call the _s()_, _v()_, _u()_, _M()_, or _K()_ method on the OrganismsGame object passed to the register method.
 
