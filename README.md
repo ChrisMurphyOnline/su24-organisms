@@ -84,7 +84,7 @@ Clearly the _move_ method is most important. This is called by the simulator on 
 
 If your player is _not_ going to reproduce, return the result of calling the static `Move.movement(action)` method, where _action_ is one of the following constants: _Action.STAY_PUT_, _Action.WEST_, _Action.EAST_, _Action.NORTH_, or _Action.SOUTH_, depending on whether the organism wants to stay where it is or whether it wants to move to an adjacent square.
 
-If your player _is_ going to reproduce, return the result of calling the static `Move.reproduce(action, state)`, where _action_ is one of the _Action_ constants (except for _STAY_PUT_, which is not allowed), and _state_ is the initial value for the offspring's state variable (passed to the new instance's _register_ method).
+If your player _is_ going to reproduce, return the result of calling `Move.reproduce(action, state)`, where _action_ is one of the _Action_ constants listed above (except for _STAY_PUT_, which is not allowed), and _state_ is the initial value for the offspring's state variable (passed to the new instance's _register_ method).
 
 If your player would like to know the configuration parameters of the environment, call the _s()_, _v()_, _u()_, _M()_, or _K()_ method on the OrganismsGame object passed to the register method.
 
