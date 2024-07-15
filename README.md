@@ -48,8 +48,8 @@ We will provide a Java program that simulates the environment in which the organ
 * _M_: maximum energy per organism (100-1000)
 * _K_: maximum food units per cell (10-50)
 
-# Creating Your Own Player <- NEEDS TO BE REVIEWED!
-Create a class called organisms.gX.GroupXPlayer where X is your group number. This class must implement organisms.Player, which defines the following methods:
+# Creating Your Own Player
+Create a class called organisms.gX.GroupXPlayer where X is your group number. This class must implement organisms.OrganismsPlayer, which defines the following methods:
 * _register_: this is called when the instance of the organism is first created; it has a reference to the OrganismsGame and also gets its ID/state value from its parent
 * _name_: returns a String indicating this species' name
 * _color_: returns a Color for use in display in the simulator
@@ -58,10 +58,12 @@ Create a class called organisms.gX.GroupXPlayer where X is your group number. Th
 * _move_: returns a Move object that indicates the direction in which this organism would like to move, or if it would like to reproduce
 
 Clearly the _move_ method is most important. This is called by the simulator on each time step of the simulation:
-* The first parameter (_foodpresent_) is a four-element array that indicates whether or not food is present in adjacent squares, e.g. _foodpresent[WEST]_ indicates whether there is food in the space to the left of this organism.
-* Likewise, the second parameter (_neighbors_) indicates the external state of any organism in an adjacent square, e.g. _neighbors[NORTH]_ returns the value of calling _externalState()_ on the organism above this one. The value will be -1 if there is no organism present in that space.
-* The third argument (_foodleft_) indicates the amount of food in the space currently occupied by the organism. The last argument (_energyleft_) indicates this organism's current energy level.
+* The first parameter (_foodHere_) indicates the amount of food in the space currently occupied by the organism.
+* The second parameter (_energyLeft_) indicates this organism's current energy level.
+* The next four parameters (_foodN_, _foodE_, _foodS_, _foodW_) indicate whether or not food is present in adjacent squares. Note that you cannot know how much food is there, only whether there is food present.
+* Likewise, the four parameters that follow (_neighborN_, _neighborE_, _neighborS_, _neighborW_) indicate the external state of any organism in an adjacent square, e.g. _neighborN_ returns the value of calling _externalState()_ on the organism above this one. The value will be -1 if there is no organism present in that space.
 
+**THIS NEEDS TO BE UPDATED! IT USES AN Action OBJECT**
 If your player is not going to reproduce, return a new Move object in which the argument to the constructor is either the constant _STAYPUT_, _WEST_, _EAST_, _NORTH_, or _SOUTH_.
 
 If your player is going to reproduce, return a new Move object in which:
@@ -73,6 +75,6 @@ If your player would like to know the configuration parameters, call the _s()_, 
 
 **You may not use static variables to communicate between instances of your species.** The only communication can be done using the _externalState_ method, keeping in mind that organisms of other species will be able to observe that value as well.
 
-To add your player to the simulation, list it in the CLASS_LIST and PLAYER_LIST entries in gamemodel.properties (you can have multiple entries separated by commas).
+To add your player to the simulation, list it in the CLASS_LIST and PLAYER_LIST entries in gamemodel.properties; you can have multiple entries separated by commas.
 
 Note: To do logging/debugging, you may use System.out.println or System.err.println to write to the console, but please comment these out before submitting players for the tournaments. You may also call the _print_ or _println_ method in the OrganismsGame object to have text appear in the “messages” console in the simulator.
