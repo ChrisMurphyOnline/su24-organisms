@@ -48,6 +48,25 @@ We will provide a Java program that simulates the environment in which the organ
 * _M_: maximum energy per organism (100-1000)
 * _K_: maximum food units per cell (10-50)
 
+# Running the Simulator
+Once you have downloaded the code in this repo, use IntelliJ to create a new project with the GitHub repo root as the root of the IntelliJ project.
+
+To start the simulator, simply execute the `organisms.ui.GUI.main()` method and you should see the simulator environment appear. 
+
+To run a simulation:
+* Press **Reset** to start a new simulation
+* Press **Step** to advance one time unit. This will call the _move_ method on each organism in the simulation, as described below.
+* Press **100 steps** to advance 100 steps at a time.
+* Press **Play** to continuously step through the simulation, which will stop until either the _maxRounds_ configuration has been reached, or until there are no remaining organisms.
+* Press **Stop** to end the simulation at any time.
+
+If a cell in the environment is occupied, you will see a colored square with "s" indicating that organism's external state and "e" indicating its energy level.
+If the cell is unoccupied, the number that is shown indicates how much food is available there.
+
+To configure the simulation, modify gamemodel.properties; note that this is only read when the simulator is started, and not while it is running.
+
+If you'd like to change the configuration after having started the simulator, click the "Configuration" tab in the top right and modify the value you'd like to change. **Be sure to press Enter/Return** after you change the value, otherwise it will not be modified.
+
 # Creating Your Own Player
 Create a class called organisms.gX.GroupXPlayer where X is your group number. This class must implement organisms.OrganismsPlayer, which defines the following methods:
 * _register_: this is called when the instance of the organism is first created; it has a reference to the OrganismsGame and also gets its ID/state value from its parent
