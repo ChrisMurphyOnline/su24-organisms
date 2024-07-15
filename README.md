@@ -82,15 +82,11 @@ Clearly the _move_ method is most important. This is called by the simulator on 
 * The next four parameters (_foodN_, _foodE_, _foodS_, _foodW_) indicate whether or not food is present in adjacent squares. Note that you cannot know how much food is there, only whether there is food present.
 * Likewise, the four parameters that follow (_neighborN_, _neighborE_, _neighborS_, _neighborW_) indicate the external state of any organism in an adjacent square, e.g. _neighborN_ returns the value of calling _externalState()_ on the organism above this one. The value will be -1 if there is no organism present in that space.
 
-**THIS NEEDS TO BE UPDATED! IT USES AN Action OBJECT**
-If your player is not going to reproduce, return a new Move object in which the argument to the constructor is either the constant _STAYPUT_, _WEST_, _EAST_, _NORTH_, or _SOUTH_.
+If your player is _not_ going to reproduce, return the result of calling the static `Move.movement(action)` method, where _action_ is one of the following constants: _Action.STAY_PUT_, _Action.WEST_, _Action.EAST_, _Action.NORTH_, or _Action.SOUTH_, depending on whether the organism wants to stay where it is or whether it wants to move to an adjacent square.
 
-If your player is going to reproduce, return a new Move object in which:
-* the first argument to the constructor is the constant _REPRODUCE_
-* the second argument is the direction to which the offspring should be born (_WEST_, _EAST_, _NORTH_, or _SOUTH_); keep in mind that you cannot reproduce onto an already-occupied space
-* the third argument is the initial value for the offspring's state variable (passed to the new instance's _register_ method)
+If your player _is_ going to reproduce, return the result of calling the static `Move.reproduce(action, state)`, where _action_ is one of the _Action_ constants (except for _STAY_PUT_, which is not allowed), and _state_ is the initial value for the offspring's state variable (passed to the new instance's _register_ method).
 
-If your player would like to know the configuration parameters, call the _s()_, _v()_, _u()_, _M()_, or _K()_ method on the OrganismsGame object passed to the register method.
+If your player would like to know the configuration parameters of the environment, call the _s()_, _v()_, _u()_, _M()_, or _K()_ method on the OrganismsGame object passed to the register method.
 
 **You may not use static variables to communicate between instances of your species.** The only communication can be done using the _externalState_ method, keeping in mind that organisms of other species will be able to observe that value as well.
 
